@@ -37,9 +37,8 @@ public class Stock {
     @Column(nullable = false)
     private Timestamp timestamp;
 
-//    @Column(nullable = false, name = "date_only")
-//    @Formula("select date::DATE from stocks;")
-//    private Date date_only;
+    @Column(name = "date_only")
+    private Date date_only;
 
 
     public Stock() { }

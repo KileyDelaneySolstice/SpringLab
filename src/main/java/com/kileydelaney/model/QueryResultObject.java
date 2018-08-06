@@ -1,7 +1,12 @@
 package com.kileydelaney.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class QueryResultObject {
 
+    @JsonFormat(
+            shape = JsonFormat.Shape.STRING,
+            pattern = "dd-MM-yyyy")
     private String date;
 
     private String symbol;
@@ -11,8 +16,6 @@ public class QueryResultObject {
     private double minPrice;
 
     private int totalVol;
-
-    private double closingPrice;
 
 
 
@@ -41,20 +44,14 @@ public class QueryResultObject {
     public void setTotalVol(int vol) { this.totalVol = vol; }
 
 
-    public double getClosingPrice() { return closingPrice; }
-
-    public void setClosingPrice(double closingPrice) { this.closingPrice = closingPrice; }
-
-
 
     public String toString() {
-        if (maxPrice == 0 || minPrice == 0 || totalVol == 0 || closingPrice == 0) {
+        if (maxPrice == 0 || minPrice == 0 || totalVol == 0) {
             return "Sorry, no data for that date and/or stock";
         } else {
-            return ("The highest price of stock " + symbol + " on " + date + " is $" + maxPrice + "\n" +
-                    "The lowest price of stock " + symbol + " on " + date + " is $" + minPrice + "\n" +
-                    "The total volume of stock " + symbol + " traded on " + date + " is " + totalVol + " units \n" +
-                    "The closing price of stock " + symbol + " on " + date + " is $" + closingPrice);
+            return ("The highest price of stock " + symbol + " on " + date + " is $" + maxPrice + ". \n" +
+                    "The lowest price of stock " + symbol + " on " + date + " is $" + minPrice + ". \n" +
+                    "The total volume of stock " + symbol + " traded on " + date + " is " + totalVol + " units. \n");
         }
     }
 
@@ -82,12 +79,5 @@ public class QueryResultObject {
         }
     }
 
-    public String closingToString() {
-        if (closingPrice == 0) {
-            return "Sorry, no data for that date and/or stock";
-        } else {
-            return ("The closing price of stock " + symbol + " on " + date + " is $" + closingPrice);
-        }
-    }
 
 }
