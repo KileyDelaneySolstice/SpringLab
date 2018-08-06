@@ -37,9 +37,9 @@ public class Stock {
     @Column(nullable = false)
     private Timestamp timestamp;
 
-    @Column(nullable = false, name = "date_only")
-    @Formula("cast(timestamp as date)")
-    private Date date_only;
+//    @Column(nullable = false, name = "date_only")
+//    @Formula("select date::DATE from stocks;")
+//    private Date date_only;
 
 
     public Stock() { }
@@ -95,7 +95,7 @@ public class Stock {
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
 
-        Stock[] stockList = mapper.readValue(new File("/Users/kileydelaney/Downloads/SpringLab-master 3/src/main/resources/week2-stocks.json"), Stock[].class);
+        Stock[] stockList = mapper.readValue(new File("/Users/kileydelaney/Documents/SpringLab/src/main/resources/week2-stocks.json"), Stock[].class);
 
         return Arrays.asList(stockList);
     }

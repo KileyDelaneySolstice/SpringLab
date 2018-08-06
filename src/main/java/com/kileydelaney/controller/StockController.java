@@ -37,29 +37,22 @@ public class StockController {
         return stockRepository.findAll();
     }
 
-    // test
-    @GetMapping("/datecount")
-    public long count() { return stockRepository.getTotalCount(); }
-
     // retrieve highest price of a given stock on given date
-    // SQL query = "SELECT price FROM stocks WHERE price = (SELECT MAX(price) FROM stocks_table WHERE date_only = '"+date+"' AND symbol = '"+symbol+"')"
     @GetMapping("/high/{symbol}/{date}")
-    public String retrieveHighestPrice(@PathVariable String symbol, @PathVariable String date) {
-        return "Success for: " + symbol + " " + date;
+    public Stock retrieveHighestPrice(@PathVariable String date, @PathVariable String symbol) {
+        return stockRepository.getMaxPriceByDateAndSymbol(date, symbol);
     }
 
     // retrieve lowest price of a given stock on given date
-    // SQL query = "SELECT price FROM stocks WHERE price = (SELECT MIN(price) FROM stocks_table WHERE date_only = '"+date+"' AND symbol = '"+symbol+"')"
     @GetMapping("/low/{symbol}/{date}")
-    public String retrieveLowestPrice(@PathVariable String symbol, @PathVariable String date) {
-        return "Success for: " + symbol + " " + date;
+    public Stock retrieveLowestPrice(@PathVariable String date, @PathVariable String symbol) {
+        return stockRepository.getMinPriceByDateAndSymbol(date, symbol);
     }
 
     // retrieve total volume of a given stock traded on given date
-    // SQL query = "SELECT COUNT(volume) FROM stocks WHERE date_only = '"+date+"' AND symbol = '"+symbol+"'"
     @GetMapping("total/{symbol}/{date}")
-    public String retrieveTotalVolume(@PathVariable String symbol, @PathVariable String date) {
-        return "Success for: " + symbol + " " + date;
+    public Stock retrieveTotalVolume(@PathVariable String date, @PathVariable String symbol) {
+        return stockRepository.getTotalVolumeByDateAndSymbol(date, symbol);
     }
 
     // get a single stock (by id)
@@ -70,6 +63,14 @@ public class StockController {
         } else {
             return null;
         }
+    }
+
+
+
+
+    @GetMapping("/high/{symbol}")
+    public Stock retrieveHighestPrice(@PathVariable String symbol) {
+        return stockRepository.getMaxPriceBySymbol(symbol);
     }
 
 
