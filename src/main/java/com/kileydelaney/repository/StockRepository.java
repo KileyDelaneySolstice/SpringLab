@@ -18,8 +18,5 @@ public interface StockRepository extends CrudRepository<Stock, Long> {
     @Query(value = "SELECT COUNT(volume) FROM stocks WHERE date_only = :date_only AND symbol = :symbol", nativeQuery = true)
     Stock getTotalVolumeByDateAndSymbol(@Param("date_only") String date_only, @Param("symbol") String symbol);
 
-    @Query(value = "SELECT price FROM stocks WHERE price = (SELECT MAX(price) FROM stocks WHERE symbol = :symbol)", nativeQuery = true)
-    Stock getMaxPriceBySymbol(@Param("symbol") String symbol);
-
 
 }

@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.web.bind.annotation.*;
 
+import javax.management.Query;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,20 +40,23 @@ public class StockController {
 
     // retrieve highest price of a given stock on given date
     @GetMapping("/high/{symbol}/{date}")
-    public Stock retrieveHighestPrice(@PathVariable String date, @PathVariable String symbol) {
-        return stockRepository.getMaxPriceByDateAndSymbol(date, symbol);
+    public String retrieveHighestPrice(@PathVariable String date, @PathVariable String symbol) {
+        return "Success for date " + date + ", symbol: " + symbol;
+//        return stockRepository.getMaxPriceByDateAndSymbol(date, symbol);
     }
 
     // retrieve lowest price of a given stock on given date
     @GetMapping("/low/{symbol}/{date}")
-    public Stock retrieveLowestPrice(@PathVariable String date, @PathVariable String symbol) {
-        return stockRepository.getMinPriceByDateAndSymbol(date, symbol);
+    public String retrieveLowestPrice(@PathVariable String date, @PathVariable String symbol) {
+        return "Success for date " + date + ", symbol: " + symbol;
+//        return stockRepository.getMinPriceByDateAndSymbol(date, symbol);
     }
 
     // retrieve total volume of a given stock traded on given date
     @GetMapping("total/{symbol}/{date}")
-    public Stock retrieveTotalVolume(@PathVariable String date, @PathVariable String symbol) {
-        return stockRepository.getTotalVolumeByDateAndSymbol(date, symbol);
+    public String retrieveTotalVolume(@PathVariable String date, @PathVariable String symbol) {
+        return "Success for date " + date + ", symbol: " + symbol;
+//        return stockRepository.getTotalVolumeByDateAndSymbol(date, symbol);
     }
 
     // get a single stock (by id)
@@ -64,14 +68,5 @@ public class StockController {
             return null;
         }
     }
-
-
-
-
-    @GetMapping("/high/{symbol}")
-    public Stock retrieveHighestPrice(@PathVariable String symbol) {
-        return stockRepository.getMaxPriceBySymbol(symbol);
-    }
-
 
 }
