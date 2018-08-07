@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.management.Query;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,6 +73,17 @@ public class StockController {
         qro.setTotalVol(stockRepository.getTotalVolumeByDateAndSymbol(date, symbol));
 
         return qro.volToString();
+    }
+
+    // retrieve closing price of a given stock on a given date
+    @GetMapping("closing/{symbol}/{date}")
+    public String retrieveClosingPrice(@PathVariable String date, @PathVariable String symbol) {
+        qro = new QueryResultObject();
+        qro.setDate(date);
+        qro.setSymbol(symbol);
+        qro.setClosingPrice(stockRepository.getClosingPriceByDateAndSymbol(date, symbol));
+
+        return qro.closingToString();
     }
 
     // retrieve aggregated data summary

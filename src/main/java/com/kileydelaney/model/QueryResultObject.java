@@ -17,6 +17,8 @@ public class QueryResultObject {
 
     private int totalVol;
 
+    private double closingPrice;
+
 
 
     public String getDate() { return date; }
@@ -42,6 +44,10 @@ public class QueryResultObject {
     public int getTotalVol() { return totalVol; }
 
     public void setTotalVol(int vol) { this.totalVol = vol; }
+
+    public double getClosingPrice() { return closingPrice; }
+
+    public void setClosingPrice(double closingPrice) { this.closingPrice = closingPrice; }
 
 
 
@@ -76,6 +82,14 @@ public class QueryResultObject {
             return "Sorry, no data for that date and/or stock";
         } else {
             return ("The total volume of stock " + symbol + " traded on " + date + " is " + totalVol + " units");
+        }
+    }
+
+    public String closingToString() {
+        if (closingPrice == 0) {
+            return "Sorry, no data for that date and/or stock";
+        } else {
+            return ("The closing price of stock " + symbol + " on " + date + " is $" + closingPrice);
         }
     }
 
