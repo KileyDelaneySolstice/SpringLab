@@ -23,9 +23,8 @@ public interface StockRepository extends CrudRepository<Stock, Long> {
 
     @Query(value = "SELECT MIN(price) FROM stocks WHERE date_only = :date_only AND symbol = :symbol", nativeQuery = true)
     double getMinPriceByDateAndSymbol(@Param("date_only") String date_only, @Param("symbol") String symbol);
-
-    // TODO: Fix SQL syntax so that it actually retrieves total volume of stock traded on date (27417 = 481 * 57)
-    @Query(value = "SELECT COUNT(volume) FROM stocks WHERE date_only = :date_only AND symbol = :symbol", nativeQuery = true)
+    
+    @Query(value = "SELECT SUM(volume) FROM stocks WHERE date_only = :date_only AND symbol = :symbol", nativeQuery = true)
     int getTotalVolumeByDateAndSymbol(@Param("date_only") String date_only, @Param("symbol") String symbol);
 
 
