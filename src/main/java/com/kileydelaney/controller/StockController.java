@@ -36,6 +36,13 @@ public class StockController {
         return "Stocks loaded successfully!";
     }
 
+    // empty table
+    @GetMapping("/clear")
+    public String deleteStocks() {
+        stockRepository.deleteAll();
+        return "Stocks deleted successfully!";
+    }
+
     // list stocks
     @GetMapping("/list")
     public Iterable<Stock> list() {
@@ -95,6 +102,7 @@ public class StockController {
         qro.setMaxPrice(stockRepository.getMaxPriceByDateAndSymbol(date, symbol));
         qro.setMinPrice(stockRepository.getMinPriceByDateAndSymbol(date, symbol));
         qro.setTotalVol(stockRepository.getTotalVolumeByDateAndSymbol(date, symbol));
+        qro.setClosingPrice(stockRepository.getClosingPriceByDateAndSymbol(date, symbol));
 
         return qro.toString();
     }

@@ -34,7 +34,7 @@ public interface StockRepository extends CrudRepository<Stock, Long> {
 
 
     // additional queries for lab 2
-    @Query(value = "SELECT price FROM stocks WHERE timestamp = (SELECT MAX(timestamp) FROM stocks WHERE date_only = :date_only AND symbol = :symbol)", nativeQuery = true)
-    int getClosingPriceByDateAndSymbol(@Param("date_only") String date_only, @Param("symbol") String symbol);
+    @Query(value = "SELECT price FROM stocks WHERE timestamp = (SELECT MAX(timestamp) FROM stocks WHERE date_only = :date_only) AND symbol = :symbol LIMIT 1", nativeQuery = true)
+    double getClosingPriceByDateAndSymbol(@Param("date_only") String date_only, @Param("symbol") String symbol);
 
 }

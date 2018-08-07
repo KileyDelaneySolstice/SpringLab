@@ -57,7 +57,8 @@ public class QueryResultObject {
         } else {
             return ("The highest price of stock " + symbol + " on " + date + " is $" + maxPrice + ". \n" +
                     "The lowest price of stock " + symbol + " on " + date + " is $" + minPrice + ". \n" +
-                    "The total volume of stock " + symbol + " traded on " + date + " is " + totalVol + " units. \n");
+                    "The total volume of stock " + symbol + " traded on " + date + " is " + totalVol + " units. \n" +
+                    "The closing price of stock " + symbol + " on " + date + " is $" + closingPrice + ". \n");
         }
     }
 
